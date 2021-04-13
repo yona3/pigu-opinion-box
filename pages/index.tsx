@@ -1,10 +1,27 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { Footer } from '../components/Footer';
 import { Form } from '../components/Form';
 import { Links } from '../components/Links';
+import { useAuthentication } from '../hooks/authentication';
 
 export default function Home() {
+  const router = useRouter();
+  const { user } = useAuthentication();
+
+  useEffect(() => {
+    if (
+      !user ||
+      user.uid !== process.env.NEXT_PUBLIC_FIREBASE_ADMIN_UID ||
+      user.isAnonymous
+    )
+      return;
+
+    // redirect
+    router.push('/admin');
+  }, [user]);
   return (
     <div className="relative pt-16 pb-36 min-h-screen">
       <Head>
