@@ -5,6 +5,7 @@ import { opinionsState } from '../store/state';
 import Link from 'next/link';
 import { useImage } from '../hooks/createImage';
 import { useEffect } from 'react';
+import ReactLoading from 'react-loading';
 
 export default function OpinionDetail(): JSX.Element {
   const router = useRouter();
@@ -20,18 +21,16 @@ export default function OpinionDetail(): JSX.Element {
 
   return (
     <div className="text-center overflow-hidden px-5">
-      {opinion && (
+      {opinion && png ? (
         <div className="max-w-xl mx-auto mt-32">
           <div>
-            {png && (
-              <Image
-                className="rounded-md"
-                alt="opinion"
-                src={png}
-                width="2000"
-                height="1050"
-              />
-            )}
+            <Image
+              className="rounded-md"
+              alt="opinion"
+              src={png}
+              width="2000"
+              height="1050"
+            />
           </div>
 
           <p className="mt-2">ID: {id}</p>
@@ -54,6 +53,14 @@ export default function OpinionDetail(): JSX.Element {
             </a>
           </Link>
         </div>
+      ) : (
+        <ReactLoading
+          className="mx-auto mt-48"
+          type="spin"
+          color="rgba(59, 130, 246)"
+          width="32px"
+          height="32px"
+        />
       )}
     </div>
   );
