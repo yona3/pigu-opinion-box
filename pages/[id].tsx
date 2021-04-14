@@ -12,7 +12,7 @@ export default function OpinionDetail(): JSX.Element {
   const opinions = useRecoilValue(opinionsState);
 
   useEffect(() => {
-    if (opinions.length === 0) router.push('/admin');
+    if (!opinions || opinions.length === 0) router.push('/admin');
   }, [opinions]);
 
   const opinion = opinions?.filter((data) => data.id === id)[0];

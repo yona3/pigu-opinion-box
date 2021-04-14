@@ -45,11 +45,9 @@ const createTextLines = (
   return lines;
 };
 
-export const useImage = (opinion: Opinion) => {
+export const useImage = (opinion: Opinion): { png: string } => {
   const [image, setImage] = useState<HTMLImageElement>(null);
-  const [png, setPng] = useState(null);
-
-  if (!process.browser) return;
+  const [png, setPng] = useState<string>(null);
 
   useEffect(() => {
     if (image) return;
@@ -61,7 +59,7 @@ export const useImage = (opinion: Opinion) => {
   }, []);
 
   useEffect(() => {
-    if (!image || png) return;
+    if (!image || !opinion || png) return;
     const canvasEl = document.createElement('canvas');
 
     const width = 600 * 2;
