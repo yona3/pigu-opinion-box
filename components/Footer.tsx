@@ -2,7 +2,7 @@ import { VFC } from 'react';
 
 export const Footer: VFC = () => {
   return (
-    <footer className="w-full text-center py-4 absolute bottom-0 border-t-2 border-gray-300 bg-white">
+    <footer className="w-full text-center py-4 absolute bottom-0 border-t border-gray-300 bg-white">
       twitter
       <a
         className="ml-1 text-blue-500"

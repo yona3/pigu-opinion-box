@@ -57,11 +57,11 @@ export const Form: VFC = () => {
     <div className="mt-8 px-4 text-center">
       <p>匿名でpiguへの意見を送る</p>
       <form
-        className="max-w-sm mx-auto mt-4 flex flex-col"
+        className="max-w-sm mx-auto mt-3 flex flex-col"
         onSubmit={handleSubmit}
       >
         <textarea
-          className="border-2 h-52 border-gray-300 rounded-md outline-none resize-none p-2 text-base sm:text-lg"
+          className="border h-52 border-gray-300 rounded-md outline-none resize-none p-2 text-base sm:text-lg"
           value={body}
           placeholder="本文を入力"
           onChange={handleChangeText}

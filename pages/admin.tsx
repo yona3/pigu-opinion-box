@@ -8,7 +8,7 @@ export default function Admin(): JSX.Element {
   const { opinions, isFetching } = useFetch();
 
   return (
-    <div className="text-center">
+    <div className="text-center min-h-screen px-5 pb-20">
       <h1 className="text-xl mt-12">pigu｜意見箱 - 管理者ページ</h1>
       {user && <p className="mt-3 text-sm">{user.uid}</p>}
       <div>
@@ -26,7 +26,7 @@ export default function Admin(): JSX.Element {
         ) : opinions?.length > 0 ? (
           <ul className="max-w-md mx-auto">
             {opinions.map((data) => (
-              <li key={data.id} className="mb-2">
+              <li key={data.id} className="mb-3">
                 <OpinionItem opinion={data} />
               </li>
             ))}
