@@ -1,14 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { Footer } from '../components/Footer';
 import { Form } from '../components/Form';
 import { Links } from '../components/Links';
 import { useAuthentication } from '../hooks/authentication';
 
 export default function Home() {
-  const router = useRouter();
   const { user } = useAuthentication();
 
   return (
@@ -47,6 +45,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <ToastContainer />
     </div>
   );
 }
