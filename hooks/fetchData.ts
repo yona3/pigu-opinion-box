@@ -14,6 +14,7 @@ export const useFetch = () => {
     firebase
       .firestore()
       .collection('opinions')
+      .orderBy('createdAt', 'desc')
       .get()
       .then((snapshot) => {
         if (snapshot.empty) return setOpinions([]);
