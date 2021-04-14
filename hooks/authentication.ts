@@ -1,13 +1,8 @@
 import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
-import { User } from '../models/User';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useEffect } from 'react';
-
-const userState = atom<User>({
-  key: 'user',
-  default: null,
-});
+import { userState } from '../store/state';
 
 // check is administrator
 export const useAuthentication = () => {

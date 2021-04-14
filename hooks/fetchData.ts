@@ -1,12 +1,8 @@
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { Opinion } from '../models/Opinion';
-
-const opinionsState = atom<Opinion[]>({
-  key: 'questions',
-  default: null,
-});
+import { opinionsState } from '../store/state';
 
 export const useFetch = () => {
   const [opinions, setOpinions] = useRecoilState(opinionsState);
