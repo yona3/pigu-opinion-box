@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
-export interface Question {
+export interface OpinionForm {
   body: string;
   createdAt: firebase.firestore.FieldValue;
-  isAnswered: boolean;
+  isReplied: boolean;
 }

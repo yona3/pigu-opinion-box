@@ -1,8 +1,8 @@
 import { KeyboardEvent, ChangeEvent, FormEvent, useState, VFC } from 'react';
 import firebase from 'firebase/app';
 import ReactLoading from 'react-loading';
-import { Question } from '../models/Question';
 import { toast } from 'react-toastify';
+import { OpinionForm } from '../models/Opinion';
 
 export const Form: VFC = () => {
   const [body, setBody] = useState<string>('');
@@ -21,17 +21,17 @@ export const Form: VFC = () => {
 
     setIsSending(true);
 
-    const question: Question = {
+    const opinion: OpinionForm = {
       body,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      isAnswered: false,
+      isReplied: false,
     };
 
     // add data
     firebase
       .firestore()
-      .collection('questions')
-      .add(question)
+      .collection('opinions')
+      .add(opinion)
       .then(() => {
         toast.success('送信しました！', {
           position: 'bottom-center',
