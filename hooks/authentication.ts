@@ -33,3 +33,8 @@ export const useAuthentication = () => {
 
   return { user };
 };
+
+export const signInWithGoogle = () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithRedirect(provider);
+};

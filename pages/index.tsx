@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { Footer } from '../components/Footer';
 import { Form } from '../components/Form';
 import { Links } from '../components/Links';
-import { useAuthentication } from '../hooks/authentication';
+import { signInWithGoogle, useAuthentication } from '../hooks/authentication';
 
 export default function Home() {
   const { user } = useAuthentication();
@@ -42,6 +42,15 @@ export default function Home() {
         <Form />
 
         <Links />
+
+        <div className="text-center mt-8">
+          <button
+            className="border border-gray-800 px-4 py-3 rounded-sm"
+            onClick={signInWithGoogle}
+          >
+            sign in with google
+          </button>
+        </div>
       </main>
 
       <Footer />
