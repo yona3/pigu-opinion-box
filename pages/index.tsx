@@ -13,7 +13,7 @@ export default function Home() {
     <div className="relative pt-16 pb-36 min-h-screen">
       <Head>
         <title>pigu｜ご意見箱</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="font-sans">

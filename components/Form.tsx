@@ -61,7 +61,7 @@ export const Form: VFC = () => {
         onSubmit={handleSubmit}
       >
         <textarea
-          className="border h-52 border-gray-300 rounded-md outline-none resize-none p-2 text-base sm:text-lg"
+          className="border appearance-none h-52 border-gray-300 rounded-md outline-none resize-none p-2 text-base sm:text-lg"
           value={body}
           placeholder="本文を入力"
           onChange={handleChangeText}
