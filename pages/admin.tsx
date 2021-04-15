@@ -2,6 +2,7 @@ import { useAuthentication } from '../hooks/authentication';
 import { useFetch } from '../hooks/fetchData';
 import ReactLoading from 'react-loading';
 import { OpinionItem } from '../components/OpinionItem';
+import Head from 'next/head';
 
 export default function Admin(): JSX.Element {
   const { user } = useAuthentication();
@@ -9,6 +10,9 @@ export default function Admin(): JSX.Element {
 
   return (
     <div className="text-center min-h-screen px-5 pb-20">
+      <Head>
+        <title>管理者ページ</title>
+      </Head>
       <h1 className="text-xl mt-12">pigu｜意見箱 - 管理者ページ</h1>
       {user && <p className="mt-3 text-sm">{user.uid}</p>}
       <div>

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useImage } from '../hooks/createImage';
 import { useEffect } from 'react';
 import ReactLoading from 'react-loading';
+import Head from 'next/head';
 
 export default function OpinionDetail(): JSX.Element {
   const router = useRouter();
@@ -23,6 +24,9 @@ export default function OpinionDetail(): JSX.Element {
     <div className="text-center overflow-hidden px-5">
       {opinion && png ? (
         <div className="max-w-xl mx-auto mt-32">
+          <Head>
+            <title>{opinion.body}</title>
+          </Head>
           <div>
             <Image
               className="rounded-md"
