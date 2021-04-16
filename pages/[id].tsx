@@ -22,7 +22,7 @@ export default function OpinionDetail(): JSX.Element {
   const { png } = useImage(opinion);
 
   return (
-    <div className="text-center overflow-hidden px-5">
+    <div className="text-center px-5 pb-32">
       {opinion && png ? (
         <div className="max-w-xl mx-auto mt-32">
           <Head>

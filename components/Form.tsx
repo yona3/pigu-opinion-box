@@ -1,7 +1,7 @@
 import { KeyboardEvent, ChangeEvent, FormEvent, useState, VFC } from 'react';
 import firebase from 'firebase/app';
 import ReactLoading from 'react-loading';
-import { toast } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 import { OpinionForm } from '../models/Opinion';
 
 export const Form: VFC = () => {
@@ -41,6 +41,7 @@ export const Form: VFC = () => {
           pauseOnHover: false,
           draggable: true,
           progress: undefined,
+          transition: Slide,
         });
 
         setBody('');
