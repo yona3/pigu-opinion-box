@@ -10,7 +10,7 @@ import { OperationButtons } from '../components/OperationButtons';
 
 export default function OpinionDetail(): JSX.Element {
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id as string;
   const opinions = useRecoilValue(opinionsState);
 
   useEffect(() => {
@@ -53,7 +53,11 @@ export default function OpinionDetail(): JSX.Element {
             </tbody>
           </table>
 
-          <OperationButtons isReplied={isReplied} setIsReplied={setIsReplied} />
+          <OperationButtons
+            router={router}
+            isReplied={isReplied}
+            setIsReplied={setIsReplied}
+          />
         </div>
       ) : (
         <ReactLoading

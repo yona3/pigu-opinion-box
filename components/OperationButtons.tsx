@@ -1,6 +1,23 @@
 import Link from 'next/link';
+import firebase from 'firebase/app';
+import { Dispatch, SetStateAction, VFC } from 'react';
+import { NextRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { opinionsState } from '../store/state';
 
-export const OperationButtons = ({ isReplied, setIsReplied }) => {
+type Props = {
+  router: NextRouter;
+  isReplied: boolean;
+  setIsReplied: Dispatch<SetStateAction<boolean>>;
+};
+
+export const OperationButtons: VFC<Props> = ({
+  router,
+  isReplied,
+  setIsReplied,
+}) => {
+  const [opinions, setOpinions] = useRecoilState(opinionsState);
+  const id = router.query.id as string;
   const siteUrl = 'https://pigu-opinion-box.vercel.app';
 
   const deleteOpinion = () => {
@@ -8,13 +25,42 @@ export const OperationButtons = ({ isReplied, setIsReplied }) => {
 
     if (!result) return;
 
-    console.log('delete.');
+    // delete
+    firebase
+      .firestore()
+      .collection('opinions')
+      .doc(id)
+      .delete()
+      .then(() => {
+        setOpinions(opinions.filter((item) => item.id !== id));
+        router.push('/admin');
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleChangeIsReplied = () => {
-    setIsReplied((c) => !c);
-    // update data
-    console.log('update.');
+    // update: opinion.isReplied
+    firebase
+      .firestore()
+      .collection('opinions')
+      .doc(id)
+      .update({ isReplied: !isReplied })
+      .then(() => {
+        setOpinions(
+          opinions.map((item) => {
+            if (item.id !== id) return item;
+
+            // new object
+            const newOpinion = { ...item };
+            newOpinion.isReplied = !isReplied;
+
+            return newOpinion;
+          })
+        );
+
+        setIsReplied(!isReplied);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
