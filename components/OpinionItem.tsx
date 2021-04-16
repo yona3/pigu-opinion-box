@@ -10,7 +10,11 @@ type Props = {
 export const OpinionItem: VFC<Props> = ({ opinion }) => {
   return (
     <Link href={`/${opinion.id}`}>
-      <div className="border-gray-300 border rounded-md px-4 pt-6 pb-3 cursor-pointer">
+      <div
+        className={`border-gray-300 border rounded-md px-4 pt-6 pb-3 cursor-pointer ${
+          opinion.isReplied ? 'bg-gray-100' : 'bg-white'
+        }`}
+      >
         <p className="text-lg text-left">{opinion.body}</p>
         <div className="text-right mt-2">
           <small>
