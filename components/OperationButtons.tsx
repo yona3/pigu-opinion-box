@@ -27,12 +27,7 @@ export const OperationButtons: VFC<Props> = ({
 
     // delete
     try {
-      await firebase
-        .firestore()
-        .collection('opinions')
-        .doc(id)
-        .delete()
-        .then(() => {});
+      await firebase.firestore().collection('opinions').doc(id).delete();
 
       setOpinions(opinions.filter((item) => item.id !== id));
       router.push('/admin');
