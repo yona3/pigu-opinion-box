@@ -20,47 +20,52 @@ export const OperationButtons: VFC<Props> = ({
   const id = router.query.id as string;
   const siteUrl = 'https://pigu-opinion-box.vercel.app';
 
-  const deleteOpinion = () => {
+  const deleteOpinion = async () => {
     const result = confirm('削除しますか？');
 
     if (!result) return;
 
     // delete
-    firebase
-      .firestore()
-      .collection('opinions')
-      .doc(id)
-      .delete()
-      .then(() => {
-        setOpinions(opinions.filter((item) => item.id !== id));
-        router.push('/admin');
-      })
-      .catch((err) => console.error(err));
+    try {
+      await firebase
+        .firestore()
+        .collection('opinions')
+        .doc(id)
+        .delete()
+        .then(() => {});
+
+      setOpinions(opinions.filter((item) => item.id !== id));
+      router.push('/admin');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleChangeIsReplied = () => {
+  const handleChangeIsReplied = async () => {
     // update: opinion.isReplied
-    firebase
-      .firestore()
-      .collection('opinions')
-      .doc(id)
-      .update({ isReplied: !isReplied })
-      .then(() => {
-        setOpinions(
-          opinions.map((item) => {
-            if (item.id !== id) return item;
+    try {
+      await firebase
+        .firestore()
+        .collection('opinions')
+        .doc(id)
+        .update({ isReplied: !isReplied });
 
-            // new object
-            const newOpinion = { ...item };
-            newOpinion.isReplied = !isReplied;
+      setOpinions(
+        opinions.map((item) => {
+          if (item.id !== id) return item;
 
-            return newOpinion;
-          })
-        );
+          // new object
+          const newOpinion = { ...item };
+          newOpinion.isReplied = !isReplied;
 
-        setIsReplied(!isReplied);
-      })
-      .catch((err) => console.error(err));
+          return newOpinion;
+        })
+      );
+
+      setIsReplied(!isReplied);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

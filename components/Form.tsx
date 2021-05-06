@@ -15,7 +15,7 @@ export const Form: VFC = () => {
   const blockEnterKey = (e: KeyboardEvent<HTMLTextAreaElement>) =>
     e.code === 'Enter' && e.preventDefault();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (body.length === 0 || isSending) return;
 
@@ -28,30 +28,27 @@ export const Form: VFC = () => {
     };
 
     // add data
-    firebase
-      .firestore()
-      .collection('opinions')
-      .add(opinion)
-      .then(() => {
-        toast.success('送信しました！', {
-          position: 'bottom-center',
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          transition: Slide,
-        });
+    try {
+      await firebase.firestore().collection('opinions').add(opinion);
 
-        setBody('');
-        setIsSending(false);
-      })
-      .catch((err) => {
-        alert(`処理に失敗しました。運営に報告してください。`);
-        console.error(err);
-        setIsSending(false);
+      toast.success('送信しました！', {
+        position: 'bottom-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        transition: Slide,
       });
+
+      setBody('');
+      setIsSending(false);
+    } catch (err) {
+      alert(`処理に失敗しました。運営に報告してください。`);
+      console.error(err);
+      setIsSending(false);
+    }
   };
 
   return (
